@@ -28,6 +28,7 @@ https://www.trufflesuite.com/ganache
   
   2. Truffle migrate
       ```
+      npm install babel-register --save-dev
       truffle migrate
       ```
   
@@ -90,8 +91,7 @@ token.transactionHash       token.transfer              token.transferFrom
     const accounts = await web3.eth.getAccounts() 
     accounts
     account = accounts[0]
-
-    web3.eth.getBalance(account)
+    account
     ```
 
     > Output 'accounts': 
@@ -110,11 +110,68 @@ token.transactionHash       token.transfer              token.transferFrom
     ]
     ```
     > Output 'account or account[0]': '0xCE3dBd10E3Eb436f53F66970B56bf5B65b1923C4'
-    > Output 'getBalance(account)': '99967767340000000000'
-------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------
+    ```
+    web3.eth.getBalance(account)
+    etherBalance = await web3.eth.getBalance(account)
+    etherBalance
+    web3.utils.fromWei(etherBalance)
+    ```
+    > Output 'getBalance(account)': '99967767340000000000' (nilai WEI bukan decimal) <br>
+    > Output 'etherBalance' : '99967767340000000000' <br>
+    > Output 'fromWei(etherBalance)' : '99.96776734' (nilai decimal dari WEI)
+    ------------------------------------------------------------------------------------------------------------
+    ```
+    token.decimals()
+    dec = await token.decimals()
+    dec.toString()
+    ```
+    > Output 'token.decimals()': BN { negative: 0, words: [ 18, <1 empty item> ], length: 1, red: null }  <br>
+    > Output 'dec.toString()' : '18'
+    ------------------------------------------------------------------------------------------------------------
+    ```
+    web3.utils.toWei('98.85')
+
+    token.mint(account, web3.utils.toWei("100"))
+    tokenBalance = await token.balanceOf(account)
+    tokenBalance
+    tokenBalance.toString()
+
+    web3.utils.fromWei(tokenBalance)
 
 
-------------------------------------------------------------------------------------------------------------
+    ```
+    > Output 'toWei('98.85')': '98850000000000000000' (nilai decimal ke WEI ) <br>
+    > Output 'tokenBalance' : 
+    ```
+        BN {
+        negative: 0,
+        words: [ 51380224, 30903128, 22204, <1 empty item> ],
+        length: 3,
+        red: null
+        }
+      ```
+      > Output 'tokenBalance.toString()' : '100000000000000000000' <br>
+      > Output 'fromWei(tokenBalance)' : '100'
+    ------------------------------------------------------------------------------------------------------------
+    ```
+    token.totalSupply()
+    totalSupply = await token.totalSupply()
+    totalSupply.toString()
+    web3.utils.fromWei(totalSupply)
+    ```
+    > Output 'totalSupply()' : 
+    ```
+        BN {
+        negative: 0,
+        words: [ 51380224, 30903128, 22204, <1 empty item> ],
+        length: 3,
+        red: null
+        }
+    ```
+    > Output 'totalSupply.toString()' : '100000000000000000000' <br>
+    > Output 'fromWei(totalSupply)' : '100'
+    ------------------------------------------------------------------------------------------------------------
     </p>
     </details>
 </p>
