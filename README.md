@@ -82,8 +82,8 @@ token.transactionHash       token.transfer              token.transferFrom
 
 ------------------------------------------------------------------------------------------------------------
   * c.  Create variable 'accounts'
-    <details><summary>Isi Accounts</summary>
-    < >
+    <details><summary>Isi Token</summary>
+    <p>
     Library 'web3' untuk konek ke ethereum kita di aplikasi "ganache" <br>
 
     ```
