@@ -87,9 +87,13 @@ App = {
 
                     // Render candidate Result
                     // var candidateTemplate = "<tr><td>" + id + "</td><td>" + name + "</td><td>" + "</td><td>" + name + "</td><td>" + voteCount + "</td></tr>"
-                    var candidateTemplate = '<div class="col-md-6 col-lg-4"> <div class="card mx-30"> <img src="https://i.postimg.cc/WzjcC7Hb/1.jpg" class="card-img-top" alt="..."> <div class="card-body"> <h5 class="card-title">' + name + "</h5> <h6>" + voteCount + '</h6> <p class="card-text"> Isi text <div class="socials"> <a href="#"> <i class="fa fa-facebook"> </i> </a> </div> </div> </div> </div>'
-
-                    candidatesResults.append(candidateTemplate);
+                    if (id == 1) {
+                        var candidateTemplate = '<div class="col-md-6 col-lg-4"> <div class="card mx-30"> <img src="https://cdn1-production-images-kly.akamaized.net/P85Ddv6JF2FbVJeoCgCelmhtt4U=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/1439641/original/042027300_1482131661-reddit.jpg" class="card-img-top" alt="..."> <div class="card-body"> <h5 class="card-title" style="text-align:center;">' + name + '</h5> <h6 style="text-align:center;"> Vote: ' + voteCount + '</h6> <p class="card-text"> Perwakilan dari desa Konoha <div class="socials"> </div> </div> </div> </div>'
+                        candidatesResults.append(candidateTemplate);
+                    } else {
+                        var candidateTemplate = '<div class="col-md-6 col-lg-4"> <div class="card mx-30"> <img src="https://cdn.idntimes.com/content-images/duniaku/post/20191008/naruto-sasuke-uchiha-kecil-be340da3b7c782e66836584d5940ea73.jpg" class="card-img-top" alt="..."> <div class="card-body"> <h5 class="card-title" style="text-align:center;">' + name + '</h5> <h6 style="text-align:center;"> Vote: ' + voteCount + '</h6> <p class="card-text">  Perwakilan dari kota Binjai <div class="socials"> </div> </div> </div> </div>'
+                        candidatesResults.append(candidateTemplate);
+                    }
 
                     // Render candidate ballot option
                     var candidateOption = "<option value='" + id + "' >" + name + "</ option>"

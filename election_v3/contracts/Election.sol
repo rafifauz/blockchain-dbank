@@ -24,6 +24,8 @@ contract Election {
     constructor () public {
         addCandidate("Capres J");
         addCandidate("Capres P");
+        addCandidate("Capres Bambang");
+
     }
 
     function addCandidate (string _name) private {
