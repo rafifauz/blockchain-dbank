@@ -8,19 +8,37 @@ App = {
       return App.initWeb3();
     },
   
+    // Old initWeb3
+    // initWeb3: function() {
+    //   // TODO: refactor conditional
+    //   if (typeof web3 !== 'undefined') {
+    //     // If a web3 instance is already provided by Meta Mask.
+    //     App.web3Provider = web3.currentProvider;
+    //     web3 = new Web3(web3.currentProvider);
+    //   } else {
+    //     // Specify default instance if no web3 instance provided
+    //     App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
+    //     web3 = new Web3(App.web3Provider);
+    //   }
+    //   return App.initContract();
+    // },
+
     initWeb3: function() {
-      // TODO: refactor conditional
-      if (typeof web3 !== 'undefined') {
-        // If a web3 instance is already provided by Meta Mask.
-        App.web3Provider = web3.currentProvider;
-        web3 = new Web3(web3.currentProvider);
-      } else {
-        // Specify default instance if no web3 instance provided
-        App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
-        web3 = new Web3(App.web3Provider);
-      }
-      return App.initContract();
-    },
+
+			// Is there is an injected web3 instance?
+			if (typeof web3 !== 'undefined') {
+			ethereum.enable().then(() => {
+			web3 = new Web3(web3.currentProvider);
+			});
+			} else {
+
+			// If no injected web3 instance is detected, fallback to the TestRPC
+			web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));			
+			}
+
+			App.web3Provider=web3.currentProvider;
+			return App.initContract();
+			},
   
     initContract: function() {
       $.getJSON("Election.json", function(election) {
@@ -59,7 +77,8 @@ App = {
   
       loader.show();
       content.hide();
-  
+      
+      
       // Load account data
       web3.eth.getCoinbase(function(err, account) {
         if (err === null) {
@@ -84,8 +103,8 @@ App = {
         electionInstance.maxVoters().then(function(nilaiMax){
           maxVoters.empty();
           maxVoters.append("Maksimum voter : ",nilaiMax[`c`][0]);
-        })
-        
+        })  
+
         var curVoters = $("#curVoters");
         // nilai current voters
         electionInstance.curVoters().then(function(jumlahVote){
@@ -146,6 +165,22 @@ App = {
   
           });
         }
+
+        //Get last voter
+        var voterList = $("#voterList");
+        App.contracts.Election.deployed().then(function(instance) {
+          instance.curVoters().then(function(jumlahVote){
+            var jumlahVotes = jumlahVote[`c`][0];
+            for (var i = 0; i < jumlahVotes; i++) {
+              instance.voterList(i).then(function(list){
+                voterList.append(list,"</br>");
+              })
+            }
+
+          })
+        })
+        
+       
         return electionInstance.voters(App.account);
       }).then(function(hasVoted) {
         // Do not allow a user to vote

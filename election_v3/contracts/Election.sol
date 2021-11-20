@@ -10,6 +10,7 @@ contract Election {
 
     // Store accounts that have voted
     mapping(address => bool) public voters;
+    mapping(uint => address) public voterList;
     // Store Candidates
     // Fetch Candidate
     mapping(uint => Candidate) public candidates;
@@ -44,6 +45,7 @@ contract Election {
 
         // record that voter has voted
         voters[msg.sender] = true;
+        voterList[curVoters] = msg.sender;
         curVoters++;
         // update candidate vote Count
         candidates[_candidateId].voteCount ++;
@@ -51,4 +53,9 @@ contract Election {
         // trigger voted event
         emit votedEvent(_candidateId);
     }
+
+    function voterList(uint index)  public  view  returns(address) {
+      return voterList[index];
+    }
 }
+
