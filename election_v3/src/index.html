@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/table.css">
 
 </head>
 
@@ -73,13 +73,47 @@
                         <br>
                         <button type="submit" class="btn btn-primary">Vote</button>
                     </form>
-
+                    <p id="maxVoters" class="text-center">Maximum Voter :</p>
+                    <p id="curVoters" class="text-center">Current Vote :</p>
                 </div>
-
-
             </div>
         </div>
     </div>
+
+    <div id="bar-chart" >
+        <p class="text-center" id="graph-title">Grafik Total Vote</p>
+        <div class="graph">
+          <ul class="x-axis">
+            <li><span>kandidat 1</span></li>
+            <li><span>kandidat 2</span></li>
+            <li><span>kandidat 3</span></li>
+          </ul>
+          <ul class="y-axis">
+            <li><span>20</span></li>
+            <li><span>15</span></li>
+            <li><span>10</span></li>
+            <li><span>5</span></li>
+            <li><span>0</span></li>
+          </ul>
+          <div class="bars">
+            <div class="bar-group">
+              <div id="height1" class="bar bar-1 stat-1" style="height: 0%;">      
+                <span id="voteSatu"></span>
+              </div>
+            </div>
+            <div class="bar-group">
+              <div id="height2" class="bar bar-2 stat-2" style="height: 0%; margin-left: 8%;">
+                <span id="voteDua"></span>
+              </div>
+            </div>
+            <div class="bar-group">
+              <div id="height3" class="bar bar-3 stat-3" style="height: 0%; margin-left: 14%;">
+                <span id="voteTiga"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

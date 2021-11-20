@@ -15,6 +15,8 @@ contract Election {
     mapping(uint => Candidate) public candidates;
     // Store Candidates Count
     uint public candidatesCount;
+    uint public maxVoters = 3;
+    uint public curVoters;
 
     // voted event
     event votedEvent (
@@ -22,10 +24,9 @@ contract Election {
     );
 
     constructor () public {
-        addCandidate("Capres J");
-        addCandidate("Capres P");
-        addCandidate("Capres Bambang");
-
+        addCandidate("kandidat 1");
+        addCandidate("kandidat 2");
+        addCandidate("kandidat 3");
     }
 
     function addCandidate (string _name) private {
@@ -39,10 +40,11 @@ contract Election {
 
         // require a valid candidate
         require(_candidateId > 0 && _candidateId <= candidatesCount);
+        require(maxVoters>curVoters);
 
         // record that voter has voted
         voters[msg.sender] = true;
-
+        curVoters++;
         // update candidate vote Count
         candidates[_candidateId].voteCount ++;
 
