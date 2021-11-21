@@ -60,7 +60,7 @@ App = {
         // This is a known issue with Metamask
         // https://github.com/MetaMask/metamask-extension/issues/2393
         instance.votedEvent({}, {
-          fromBlock: 0,
+          fromBlock: 'latest',
           toBlock: 'latest'
         }).watch(function(error, event) {
           console.log("event triggered", event)
@@ -184,7 +184,9 @@ App = {
         return electionInstance.voters(App.account);
       }).then(function(hasVoted) {
         // Do not allow a user to vote
-        if(hasVoted) {
+        var maximumVoter = maxVoters.firstChild.nextSibling.data
+        var totalVoter= curVoters.firstChild.nextSibling.data
+        if(hasVoted|| maximumVoter == totalVoter) {
           $('form').hide();
         }
         loader.hide();
